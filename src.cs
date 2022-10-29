@@ -153,6 +153,22 @@ namespace Arrays{
 			return Max;
 		}
 
+		public int SecondMax(int[] arr, int N){
+			int Max = int.MinValue;
+			int SecondMax = int.MinValue;
+			for(int i = 0; i < N; i++){
+				if(arr[i] >  Max){
+					Max = arr[i];
+				}
+			}
+			for(int i = 0; i < N; i++){
+				if(arr[i] >  SecondMax && arr[i] != Max){
+					SecondMax = arr[i];
+				}
+			}
+			return SecondMax;
+		}
+
 		public int Min(int[] arr, int N){
 			int Min = int.MaxValue;
 			for(int i = 0; i < N; i++){
@@ -162,5 +178,17 @@ namespace Arrays{
 			}
 			return Min;
 		}
+
+
+		/*Little Ponny is given an array, A, of N integers. 
+		In a particular operation, he can set any element of the array equal to -1.
+		He wants your help in finding out the minimum number of operations required such that the maximum element of the 
+		resulting array is B. If it is not possible, then return -1.
+
+		Understanding the question -- there are 2 inputs, 1 array of integers lets say A and another integer B
+		question is asking the no of elements greater than B in array of integers A --> which can be reset to -1 making B as largest element,
+		if B is not present in arary of integers A --> meaning there is no way B can be made the largest elment of the array so return -1
+		*/
+	
 	}
 }

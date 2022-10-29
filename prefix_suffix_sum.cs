@@ -41,6 +41,12 @@ namespace Arrays
 
             return EquilibriumIndexes;
         }
+    
+    
+        /*Given an array, arr[] of size N, the task is to find the count of array indices such that removing an element 
+        from these indices makes the sum of even-indexed and odd-indexed array elements equal.
+        */
+    
     }
 
     public static class CommonExtensions{
