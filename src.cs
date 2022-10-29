@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 namespace Arrays{
-	public class Solution{
+	public partial class Solution{
 		public void solve(){
 
 		}
@@ -105,8 +105,62 @@ namespace Arrays{
 	
 		/*Given N array elements, check if there exists a pair i, j such that ar[i]+a[j]==k, i!=j
 		*/
-		public bool CheckSumPair(int[] arr, int N){
-			
+		public bool CheckSumPair(int[] arr, int N, int k){
+			bool flag = false;
+
+			//brute force
+			// for (int i = 0; i < N; i++)
+			// {
+			// 	for (int j = 0; j < N; j++)
+			// 	{
+			// 		if(i!= j && arr[i] + arr[j] == k){
+			// 			flag = true;
+			// 			break;
+			// 		}
+			// 	}
+			// 	if(flag){
+			// 		break;
+			// 	}
+			// }
+
+			// in brute force we are checking all the pairs, which are repetitive, so instead we can only check lower triangle or upper triangle, 
+			// complexity is still N^2 but iterations are less
+
+			for (int i = 0; i < N; i++)
+			{
+				for (int j = 0; j < i; j++)
+				{
+					if(i!= j && arr[i] + arr[j] == k){
+						flag = true;
+						break;
+					}
+				}
+				if(flag){
+					break;
+				}
+			}
+
+			return flag;
+		}
+	
+		public int Max(int[] arr, int N){
+			int Max = int.MinValue;
+			for(int i = 0; i < N; i++){
+				if(arr[i] >  Max){
+					Max = arr[i];
+				}
+			}
+			return Max;
+		}
+
+		public int Min(int[] arr, int N){
+			int Min = int.MaxValue;
+			for(int i = 0; i < N; i++){
+				if(arr[i] <  Min){
+					Min = arr[i];
+				}
+			}
+			return Min;
 		}
 	}
 }
