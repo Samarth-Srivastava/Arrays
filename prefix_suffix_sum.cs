@@ -5,6 +5,47 @@
 namespace Arrays
 {
     public partial class Solution{
+
+        public int[] GetPrefixSumArray(int[] arr, int N){
+            int sum = 0;
+            for (int i = 0; i < N; i++){
+                sum += arr[i];
+                arr[i] = sum;
+            }
+            return arr;
+        }
+
+        public int[] GetSuffixSumArray(int[] arr, int N){
+            arr = Reverse(arr, 0, N-1);
+            arr = GetPrefixSumArray(arr, N);
+            
+            return Reverse(arr, 0, N-1);
+        }
+
+        public int[] GetPrefixEvenArray(int[] arr, int N){
+            int[] newArr = new int[N];
+            int sum = 0;
+            for (int i = 0; i < N; i++){
+                if(i%2 == 0){
+                    sum += arr[i];
+                }
+                newArr[i] = sum;
+            }
+            return newArr;
+        }
+
+        public int[] GetPrefixOddArray(int[] arr, int N){
+            int[] newArr = new int[N];
+            int sum = 0;
+            for (int i = 0; i < N; i++){
+                if(i%2 == 1){
+                    sum += arr[i];
+                }
+                newArr[i] = sum;
+            }
+            return newArr;
+        }
+
         // finding equilibrium index in array
         // an index is said to be equilibrium index if sum of elements before ith index = sum of elements after ith index
         public int[] GetEquilibriumIndexesOfArray(int[] arr, int N)
@@ -14,13 +55,13 @@ namespace Arrays
                 EquilibriumIndexes[i] = -1;
             }
 
-            // construct left prefix array
-            int[] pfSum = new int[N];
-            int sum = 0;
-            for (int i = 0; i < N; i++){
-                sum += arr[i];
-                pfSum[i] = sum;
-            }
+            // construct prefix array
+            int[] pfSum = GetPrefixSumArray(arr, N); // new int[N];
+            // int sum = 0;
+            // for (int i = 0; i < N; i++){
+            //     sum += arr[i];
+            //     pfSum[i] = sum;
+            // }
 
             for(int i = 0; i < N; i++){
                 int left = 0;
@@ -46,7 +87,26 @@ namespace Arrays
         /*Given an array, arr[] of size N, the task is to find the count of array indices such that removing an element 
         from these indices makes the sum of even-indexed and odd-indexed array elements equal.
         */
-    
+        public int[] GetSpecialIndexesOfArray(int[] arr, int N){
+            int[] SpecialIndexes = new int[N];
+            for(int i = 0; i < N; i++){
+                SpecialIndexes[i] = -1;
+            }
+
+            int[] pfEvenArr = GetPrefixEvenArray(arr, N);
+            int[] pfOddArr = GetPrefixOddArray(arr, N);
+
+            for(int i = 0; i < N; i++){
+                int S_even = (i == 0 ? 0 : pfEvenArr[i-1]) + pfOddArr[N-1] - pfOddArr[i];
+                int S_odd = (i == 0 ? 0 : pfOddArr[i-1]) + pfEvenArr[N-1] - pfEvenArr[i];
+
+                if(S_even == S_odd){
+                    SpecialIndexes.Add(i);
+                }
+            }
+
+            return SpecialIndexes;
+        }
     }
 
     public static class CommonExtensions{

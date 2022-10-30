@@ -18,6 +18,8 @@ namespace Arrays
             Console.WriteLine("Max of an array: Press 6 --");
             Console.WriteLine("Min of an array: Press 7 --");
             Console.WriteLine("Equilibrium Index of an array: Press 8 --");
+            Console.WriteLine("Prefix Sum array: Press 9 --");
+            Console.WriteLine("Special Index of an array: Press 10 --");
             string? input = Console.ReadLine();
             if (!string.IsNullOrEmpty(input))
             {
@@ -46,6 +48,12 @@ namespace Arrays
                         break;
                     case 8: 
                         CallEquilibriumIndexes();
+                        break;
+                    case 9: 
+                        CallPrefixSum();
+                        break;
+                    case 10: 
+                        CallSpecialIndexes();
                         break;
                     default: 
                         Console.Clear();    
@@ -237,6 +245,83 @@ namespace Arrays
             }
             
         }
+
+        public void CallPrefixSum(){
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(' ');
+
+            int[] sfarr = new int[n_arr_str.Length];
+            int[] pfarr = new int[n_arr_str.Length];
+            int[] pfEvenarr = new int[n_arr_str.Length];
+            int[] pfOddarr = new int[n_arr_str.Length];
+
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                sfarr[i] = Convert.ToInt32(n_arr_str[i]);
+                pfarr[i] = Convert.ToInt32(n_arr_str[i]);
+                pfEvenarr[i] = Convert.ToInt32(n_arr_str[i]);
+                pfOddarr[i] = Convert.ToInt32(n_arr_str[i]);
+            }
+            
+            pfarr = s.GetPrefixSumArray(pfarr, pfarr.Length);
+            sfarr = s.GetSuffixSumArray(sfarr, sfarr.Length);
+            pfEvenarr = s.GetPrefixEvenArray(pfEvenarr, pfEvenarr.Length);
+            pfOddarr = s.GetPrefixOddArray(pfOddarr, pfOddarr.Length);
+
+            Console.WriteLine("Prefix Sum array is :");
+            for (int i = 0; i < pfarr.Length; i++)
+            {
+                Console.Write(Convert.ToInt32(pfarr[i]) + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Suffix Sum array is :");
+            for (int i = 0; i < sfarr.Length; i++)
+            {
+                Console.Write(Convert.ToInt32(sfarr[i]) + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Prefix Even array is :");
+            for (int i = 0; i < pfEvenarr.Length; i++)
+            {
+                Console.Write(Convert.ToInt32(pfEvenarr[i]) + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Prefix Odd array is :");
+            for (int i = 0; i < pfOddarr.Length; i++)
+            {
+                Console.Write(Convert.ToInt32(pfOddarr[i]) + " ");
+            }
+        }
+
+        public void CallSpecialIndexes()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(' ');
+
+            int[] arr = new int[n_arr_str.Length];
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr[i] = Convert.ToInt32(n_arr_str[i]);
+            }
+            
+            int[] indexArr = s.GetSpecialIndexesOfArray(arr, arr.Length);
+
+            Console.WriteLine("Special Indexes are :");
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if(indexArr[i] != -1){
+                    Console.Write(Convert.ToInt32(indexArr[i]) + " ");
+                }
+            }
+            
+        }
+
     }
 
 }
