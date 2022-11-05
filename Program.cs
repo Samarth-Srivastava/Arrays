@@ -18,12 +18,12 @@ namespace Arrays{
 			// for (int i = 0; i < args.Length; i++)
 			// {
 			// 	arr[i] = Convert.ToInt32(args[i]);
-			// 	arr1.Add(Convert.ToInt32(args[i]));
+			// 	// arr1.Add(Convert.ToInt32(args[i]));
 			// }
 
-			// var a = s.GetEquilibriumIndexesOfArray(arr, arr.Length);
+			// var a = s.ClosestMinMax(arr, arr.Length);
 			// for(int i = 0; i < a.Length; i++){
-            // 	Console.Write(a[i] + " ");
+            	// Console.Write(a);
 			// }
 		}
 	}

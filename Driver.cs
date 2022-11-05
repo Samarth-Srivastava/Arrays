@@ -20,6 +20,8 @@ namespace Arrays
             Console.WriteLine("Equilibrium Index of an array: Press 8 --");
             Console.WriteLine("Prefix Sum array: Press 9 --");
             Console.WriteLine("Special Index of an array: Press 10 --");
+            Console.WriteLine("Count A G pairs in an array: Press 11 --");
+            Console.WriteLine("Closest Min Max in an array: Press 12 --");
             string? input = Console.ReadLine();
             if (!string.IsNullOrEmpty(input))
             {
@@ -54,6 +56,12 @@ namespace Arrays
                         break;
                     case 10: 
                         CallSpecialIndexes();
+                        break;
+                    case 11: 
+                        CallCountAGPairs();
+                        break;
+                    case 12: 
+                        CallClosestMinMax();
                         break;
                     default: 
                         Console.Clear();    
@@ -322,6 +330,44 @@ namespace Arrays
             
         }
 
+        public void CallCountAGPairs()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter Character Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(' ');
+
+            char[] arr = new char[n_arr_str.Length];
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr[i] = n_arr_str[i][0];
+            }
+            
+            int count = s.CountAGPairs(arr, arr.Length);
+
+            Console.WriteLine("Total number of pairs are :" + count);
+            
+        }
+
+        public void CallClosestMinMax()
+        {
+             Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(' ');
+
+            int[] arr = new int[n_arr_str.Length];
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr[i] = Convert.ToInt32(n_arr_str[i]);
+            }
+            
+            int min = s.ClosestMinMax(arr, arr.Length);
+
+            Console.WriteLine(min);
+        }
     }
 
 }
