@@ -1,3 +1,6 @@
+/* if we have to count something we can think of carry forward or sliding window kind of approach
+*/
+
 namespace Arrays
 {
     public partial class Solution{
@@ -122,6 +125,79 @@ namespace Arrays
                 }
             }
             return -1;
+        }
+    
+        /* A wire connects N light bulbs.
+        Each bulb has a switch associated with it; however, due to faulty wiring, a switch also changes the state of all the bulbs to the right of the current bulb.
+        Given an initial state of all bulbs, find the minimum number of switches you have to press to turn on all the bulbs.
+        You can press the same switch multiple times.
+        Note: 0 represents the bulb is off and 1 represents the bulb is on.
+
+        
+        */
+        public int minBulbsToSwitchOn(int[] arr, int N) {
+            // we have to count bulb status = 0, but bulb status chnages once we switch on any bulb, so we have to just check 
+            // for differet bulb status once we encounter the bulb that we have to switch on.
+            int bulb_status = 0;
+            int ans = 0;
+            for(int i = 0; i < N; i++){
+                if(arr[i] == bulb_status){
+                    ans = ans + 1;
+                    bulb_status = bulb_status == 0 ? 1 : 0;
+                }
+            }
+            return ans;
+        }
+
+        /* You are given an integer array A.
+        Decide whether it is possible to divide the array into one or more subarrays of even length such that the first and last element of all subarrays will be even.
+        Return "YES" if it is possible; otherwise, return "NO" (without quotes).
+        */
+
+        public string EvenLengthSubarrayWithEvenEdgeElements(int[] arr, int N) {
+            // so the sub arrays have to be of even length, so arrays with odd length are out
+            // check the edge elements are even
+            // check the alternate middle elements to be even 
+            if(N%2 == 1){
+                return "NO";
+            }
+            if(arr[0]%2 == 1 || arr[N-1]%2 == 1){
+                return "NO";
+            }
+            if(arr[0]%2 == 0 && arr[N-1]%2 == 0){
+                return "YES";
+            }
+            for(int i = 1; i < N-1; i=i+2){
+                if(arr[i]%2 == 0 && arr[i+1]%2 == 0){
+                    return "YES";
+                }
+            }
+            return "NO";
+        }
+
+        /*Given an integer array A containing N distinct integers, you have to find all the leaders in array A.
+        An element is a leader if it is strictly greater than all the elements to its right side.
+        NOTE:The rightmost element is always a leader.
+        */
+
+        public int[] Leaders(int[] arr, int N){
+            int[] leaders = new int[N];
+            for (int i = 0; i < N; i++){
+                leaders[i] = -1;
+            }
+
+            int count = 1; //right most element is a leader
+            int max = arr[N-1];
+            leaders.Add(arr[N-1]);
+            for (int i = N-2; i >= 0; i--)
+            {
+                if(arr[i] > max){
+                    count++;
+                    max = arr[i];
+                    leaders.Add(arr[i]);
+                }
+            }
+            return leaders;
         }
     }
 }

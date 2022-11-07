@@ -22,6 +22,9 @@ namespace Arrays
             Console.WriteLine("Special Index of an array: Press 10 --");
             Console.WriteLine("Count A G pairs in an array: Press 11 --");
             Console.WriteLine("Closest Min Max in an array: Press 12 --");
+            Console.WriteLine("Leaders in an array: Press 13 --");
+            Console.WriteLine("All Sub Arrays in an array: Press 14 --");
+            Console.WriteLine("Max Sub Array Sum in an array: Press 15 --");
             string? input = Console.ReadLine();
             if (!string.IsNullOrEmpty(input))
             {
@@ -62,6 +65,15 @@ namespace Arrays
                         break;
                     case 12: 
                         CallClosestMinMax();
+                        break;
+                    case 13: 
+                        CallLeaders();
+                        break;
+                    case 14: 
+                        CallAllSubArrays();
+                        break;
+                    case 15: 
+                        CallmaxSubArraySum();
                         break;
                     default: 
                         Console.Clear();    
@@ -367,6 +379,78 @@ namespace Arrays
             int min = s.ClosestMinMax(arr, arr.Length);
 
             Console.WriteLine(min);
+        }
+
+        public void CallLeaders()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(' ');
+
+            int[] arr = new int[n_arr_str.Length];
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr[i] = Convert.ToInt32(n_arr_str[i]);
+            }
+            
+            int[] leaders = s.Leaders(arr, arr.Length);
+
+            Console.WriteLine("Leaders are :");
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if(leaders[i] != -1){
+                    Console.Write(Convert.ToInt32(leaders[i]) + " ");
+                }
+            }
+        }
+
+        public void CallAllSubArrays()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(' ');
+
+            int[] arr = new int[n_arr_str.Length];
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr[i] = Convert.ToInt32(n_arr_str[i]);
+            }
+            
+            int[][] subarrays = s.GetAllSubArrays(arr, arr.Length);
+            for (int i = 0; i < subarrays.Length; i++)
+            {
+                for (int j = 0; j < subarrays[i].Length; j++)
+                {
+                    if(subarrays[i][j] != -1){
+                        Console.Write(subarrays[i][j] + " ");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public void CallmaxSubArraySum()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(' ');
+
+            int[] arr = new int[n_arr_str.Length];
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr[i] = Convert.ToInt32(n_arr_str[i]);
+            }
+            
+            int sum = s.maxSubArraySum(arr, arr.Length);
+            
+            Console.WriteLine(sum);
+            
         }
     }
 
