@@ -25,6 +25,8 @@ namespace Arrays
             Console.WriteLine("Leaders in an array: Press 13 --");
             Console.WriteLine("All Sub Arrays in an array: Press 14 --");
             Console.WriteLine("Max Sub Array Sum in an array: Press 15 --");
+            Console.WriteLine("All Sub Array Sum in an array: Press 16 --");
+            Console.WriteLine("Starting Index of Least Average Sub Array Sum in an array: Press 17 --");
             string? input = Console.ReadLine();
             if (!string.IsNullOrEmpty(input))
             {
@@ -74,6 +76,12 @@ namespace Arrays
                         break;
                     case 15: 
                         CallmaxSubArraySum();
+                        break;
+                    case 16: 
+                        CallGetSumOfAllSubArrays();
+                        break;
+                    case 17:
+                        Call_GetIndexOfSubarrayOfSizeBWithLeastAverage();
                         break;
                     default: 
                         Console.Clear();    
@@ -447,7 +455,57 @@ namespace Arrays
                 arr[i] = Convert.ToInt32(n_arr_str[i]);
             }
             
-            int sum = s.maxSubArraySum(arr, arr.Length);
+            int[] a = s.maxSubArraySum(arr, arr.Length);
+            
+            Console.WriteLine("Max sum is : " + a[0] + "\r\nAnd the sub array is : ");
+            for (int i = a[1]; i <= a[2]; i++)
+            {
+                Console.Write(n_arr_str[i] +" ");
+            }
+            
+        }
+
+        public void Call_GetIndexOfSubarrayOfSizeBWithLeastAverage()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(' ');
+
+            System.Collections.Generic.List<int> arr = new System.Collections.Generic.List<int>();
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr.Add(Convert.ToInt32(n_arr_str[i]));
+            }
+
+            Console.WriteLine("Enter size of sub array");
+            int subarraySize = Convert.ToInt32(Console.ReadLine());
+            
+            int[] index = s.GetIndexOfSubarrayOfSizeBWithLeastAverage(arr, subarraySize);
+            
+            Console.WriteLine("Starting index is " + index[0] + "\r\nArray is");
+            for (int i = index[0]; i <= index[1]; i++)
+            {
+                Console.Write(n_arr_str[i] +" ");
+            }
+        }
+
+        public void CallGetSumOfAllSubArrays()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(' ');
+
+            int[] arr = new int[n_arr_str.Length];
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr[i] = Convert.ToInt32(n_arr_str[i]);
+            }
+            
+            int sum = s.GetSumOfAllSubArrays(arr, arr.Length);
             
             Console.WriteLine(sum);
             
