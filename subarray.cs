@@ -67,6 +67,22 @@ namespace Arrays
             #endregion
         }
 
+        // public int[,] GetSumsOfAllSubarrays(int[] arr, int givenSum){
+        //     int N = arr.Length;
+        //     int noOfSubarrays = (N * N + N) / 2;
+
+        //     int[,] subArraySums = new int[noOfSubarrays,1];
+            
+        //     int pointer = 0;
+        //     int currentsum = arr[0];
+        //     subArraySums[0,0] = 
+        //     for (int i = 1; i < N; i++)
+        //     {
+        //         currentsum += arr[i];
+        //         if(currentsum <= givenSum)
+        //     }
+        // } 
+
         public int GetSumOfAllSubArrays(int[] arr, int N)
         {
             int allSubArraySum = 0;
