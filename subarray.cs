@@ -111,14 +111,17 @@ namespace Arrays
         public int[] GetIndexOfSubarrayOfSizeBWithLeastAverage(System.Collections.Generic.List<int> A, int B)
         {
             int N = A.Count;
-            System.Collections.Generic.List<int> subArraySums = new System.Collections.Generic.List<int>();
 
             // calculate sum of subarrays of length B
             int s0 = 0, si = 0;
+            
             for (int i = 0; i < B; i++)
             {
                 s0 += A[i];
             }
+            int minSum = s0;
+            int startIndex = 0;
+            int endIndex = B-1;
             subArraySums.Add(s0);
             for (int i = 1; i < N-B+1; i++)
             {
@@ -128,21 +131,13 @@ namespace Arrays
                 else{
                     si = si - A[i-1] + A[i+B-1];
                 }
-                subArraySums.Add(si);
-            }
-
-            //just get the smallest sum and its index
-            int minSum = int.MaxValue;
-            int startIndex = -1;
-            int endIndex = -1;
-            for (int i = 0; i < subArraySums.Count; i++)
-            {
-                if(minSum > subArraySums[i]){
-                    minSum = subArraySums[i];
+                if(minSum > si){
+                    minSum = si;
                     startIndex = i;
                     endIndex = i + B - 1;
                 }
             }
+
             return new int[2] { startIndex, endIndex};
         }
     }
