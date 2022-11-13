@@ -35,6 +35,25 @@ namespace Arrays
             return listOfSubArrays;
         }
 
+        // public int[][] GetAllSubArrays2(int[] arr, int N){
+        //     int noOfSubarrays = (N * N + N) / 2;
+        //     int[][] listOfSubArrays = new int[noOfSubarrays][];
+
+        //     listOfSubArrays[0] = arr;
+        //     // arr[0] to arr[N-2]
+        //     int[] suba = new int[N-1];
+        //     for (int i = 0; i < N-1; i++)
+        //     {
+        //         suba[i] = arr[i];
+        //     }
+        //     listOfSubArrays[1] = suba;
+        //     for (int i = 1; i < N-1; i++)
+        //     {
+        //         //remove i-1 th element from suba and add i+N-1 th element in suba
+        //         suba.remove
+        //     }
+        // }
+
         public int[] maxSubArraySum(int[] arr, int N)
         {
             int[] pfArr = GetPrefixSumArray(arr, N);
@@ -122,7 +141,6 @@ namespace Arrays
             int minSum = s0;
             int startIndex = 0;
             int endIndex = B-1;
-            subArraySums.Add(s0);
             for (int i = 1; i < N-B+1; i++)
             {
                 if(i == 1){

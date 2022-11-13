@@ -8,18 +8,27 @@ namespace Arrays
 
         public int[] GetPrefixSumArray(int[] arr, int N){
             int sum = 0;
+            int[] pfSumArr = new int[N];
             for (int i = 0; i < N; i++){
                 sum += arr[i];
-                arr[i] = sum;
+                pfSumArr[i] = sum;
             }
-            return arr;
+            return pfSumArr;
         }
 
         public int[] GetSuffixSumArray(int[] arr, int N){
-            arr = Reverse(arr, 0, N-1);
-            arr = GetPrefixSumArray(arr, N);
+            // arr = Reverse(arr, 0, N-1);
+            // arr = GetPrefixSumArray(arr, N);
             
-            return Reverse(arr, 0, N-1);
+            // return Reverse(arr, 0, N-1);
+
+            int sum = 0;
+            int[] sfSumArr = new int[N];
+            for (int i = N-1; i >= 0; i--){
+                sum += arr[i];
+                sfSumArr[i] = sum;
+            }
+            return sfSumArr;
         }
 
         public int[] GetPrefixEvenArray(int[] arr, int N){

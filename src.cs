@@ -186,9 +186,27 @@ namespace Arrays{
 		resulting array is B. If it is not possible, then return -1.
 
 		Understanding the question -- there are 2 inputs, 1 array of integers lets say A and another integer B
-		question is asking the no of elements greater than B in array of integers A --> which can be reset to -1 making B as largest element,
-		if B is not present in arary of integers A --> meaning there is no way B can be made the largest elment of the array so return -1
+		question is asking the no of elements greater than B in array of integers A --> which can be reset to -1 making B 
+		as largest element, if B is not present in arary of integers A --> meaning there is no way B can be made the 
+		largest elment of the array so return -1
 		*/
-	
+
+		/*Pick from 2 sides, pick subarray of a given size which has maximum sum
+		
+		Solution thought -- we need to compare sum, we can make prefix sum array, we need to pick up elements
+		from both sides, so for sum of elements from last, we may need suffix sum array also
+		*/
+		public int PickFromBothSides(int[] arr, int N, int B){
+
+			int[] pfSumArr = GetPrefixSumArray(arr, N);
+			int[] sfSumArr = GetSuffixSumArray(arr, N);
+
+			int maxSubArrSum = int.MinValue;
+			for(int i  = 0; i <= B; i++){
+				int sum = (i == 0 ? 0 : pfSumArr[i-1]) + (i == B ? 0 : sfSumArr[N-B+i]);
+				maxSubArrSum = Max(maxSubArrSum, sum);
+			}
+			return maxSubArrSum;
+		}
 	}
 }
