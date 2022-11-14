@@ -27,6 +27,7 @@ namespace Arrays
             Console.WriteLine("Max Sub Array Sum in an array: Press 15 --");
             Console.WriteLine("All Sub Array Sum in an array: Press 16 --");
             Console.WriteLine("Starting Index of Least Average Sub Array Sum in an array: Press 17 --");
+            Console.WriteLine("Pick from both sides: Press 18 --");
             string? input = Console.ReadLine();
             if (!string.IsNullOrEmpty(input))
             {
@@ -82,6 +83,9 @@ namespace Arrays
                         break;
                     case 17:
                         Call_GetIndexOfSubarrayOfSizeBWithLeastAverage();
+                        break;
+                    case 18:
+                        CallPickFromBothSides();
                         break;
                     default: 
                         Console.Clear();    
@@ -509,6 +513,29 @@ namespace Arrays
             
             Console.WriteLine(sum);
             
+        }
+
+        public void CallPickFromBothSides(){
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(", ");
+
+            int[] arr = new int[n_arr_str.Length];
+            System.Collections.Generic.List<int> lst = new System.Collections.Generic.List<int>();
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr[i] = Convert.ToInt32(n_arr_str[i]);
+                lst.Add(arr[i]);
+            }
+
+            Console.WriteLine("Enter size of sub array");
+            int subarraySize = Convert.ToInt32(Console.ReadLine());
+
+            int sum = s.PickFromBothSides2List(lst, arr.Length, subarraySize);
+            
+            Console.WriteLine(sum);
         }
     }
 

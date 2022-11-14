@@ -208,5 +208,53 @@ namespace Arrays{
 			}
 			return maxSubArrSum;
 		}
+
+		public int PickFromBothSides2(int[] arr, int N, int B){
+
+			int[] arr1 = new int[2*N];
+			for (int i = 0; i < 2*N; i++)
+			{
+				arr1[i] = arr[i%N];
+			}
+
+			// get first sum
+			int sum = 0;
+			for (int i = N-B; i < N; i++)
+			{
+				sum += arr1[i];
+			}
+			int maxSubArrSum = sum;
+			for (int i = N-B+1; i < 2*N-B; i++)
+			{
+				sum = sum - arr1[i-1] + arr1[i+B-1];
+				maxSubArrSum = Max(maxSubArrSum, sum);
+			}
+
+			return maxSubArrSum;
+		}
+
+		public int PickFromBothSides2List(List<int> arr, int N, int B){
+
+			List<int> arr1 = new List<int>();
+			for (int i = 0; i < 2*N; i++)
+			{
+				arr1.Add(arr[i%N]);
+			}
+
+			// get first sum
+			int sum = 0;
+			for (int i = N-B; i < N; i++)
+			{
+				sum += arr1[i];
+			}
+			int maxSubArrSum = sum;
+			for (int i = N-B+1; i < 2*N-B; i++)
+			{
+				sum = sum - arr1[i-1] + arr1[i+B-1];
+				maxSubArrSum = Max(maxSubArrSum, sum);
+			}
+
+			return maxSubArrSum;
+		}
 	}
 }
