@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Arrays
 {
     public partial class Solution
@@ -33,6 +35,51 @@ namespace Arrays
                 }
             }
             return listOfSubArrays;
+        }
+
+        // given N array elements, check if there exists a subarray with sum = 0
+        public int[] SubArrayWithSum0(int[] arr, int N){
+
+            // loop thru array if there is any element = 0, that is sum 0 subarray
+            // else create prefix sum array and loop thru it, if any sum is 0 (meaning startpoint 0 and endpoint i) or 
+            // if any 2 sums are same (meaning startpoint is firstIndex +1 and endpoint is i)
+
+            int flag = 0;
+            int startpoint = -1;
+            int endpoint = -1;
+            int[] pfArr = GetPrefixSumArray(arr, N);
+            Dictionary<int, List<int>> dic = new Dictionary<int, List<int>>();
+            for (int i = 0; i < N; i++)
+            {
+                if(arr[i] == 0){
+                    flag = 1;
+                    startpoint = i;
+                    endpoint = i;
+                }
+                if(dic.ContainsKey(pfArr[i])){
+                    dic[pfArr[i]].Add(i);
+                }
+                else{
+                    dic[pfArr[i]] = new List<int>{i};
+                }
+            }
+            int maxLen = 0;
+            if(flag != 1){
+                for (int i = 0; i < dic.Count; i++)
+                {
+                    if(dic[pfArr[i]].Count > 1){
+                        flag = 1;
+                        startpoint = dic[pfArr[i]][0];
+                        endpoint = dic[pfArr[i]][1];
+                        maxLen = Max(maxLen, (endpoint - startpoint + 1));
+
+                    }
+                    // if(flag == 1){
+                    //     break;
+                    // }
+                }
+            }
+            return new int[] { flag, startpoint, endpoint };
         }
 
         // public int[][] GetAllSubArrays2(int[] arr, int N){
@@ -157,6 +204,48 @@ namespace Arrays
             }
 
             return new int[2] { startIndex, endIndex};
+        }
+    
+        // Largest Positive Subarray
+        public List<int> LargestPositiveSubarray(List<int> A) {
+            int N = A.Count;
+            List<int> indexOfNegativeElements = new List<int>();
+            for(int i = 0; i <N; i++){
+                if(A[i] < 0){
+                    indexOfNegativeElements.Add(i);
+                }
+            }
+
+            int startPoint = 0, newStartPoint = 0;
+            int endPoint = -1;
+            int maxlen = int.MinValue;
+            for(int i = 0; i < indexOfNegativeElements.Count; i++){
+                if(indexOfNegativeElements[i] != newStartPoint){
+                    int len = indexOfNegativeElements[i] - newStartPoint;
+                    if(len > maxlen){
+                        endPoint = indexOfNegativeElements[i]-1;
+                        maxlen = len;
+                        startPoint = newStartPoint;
+                    }
+                }
+                newStartPoint = indexOfNegativeElements[i] + 1;
+            }
+
+            if(newStartPoint <= N){
+                int len = N - newStartPoint;
+                if(len > maxlen){
+                    endPoint = N-1;
+                    maxlen = len;
+                    startPoint = newStartPoint;
+                }
+            }
+            
+            List<int> longestSubArray = new List<int>();
+            for(int i = startPoint; i <= endPoint; i++){
+                longestSubArray.Add(A[i]);
+            }
+
+            return longestSubArray;
         }
     }
 }

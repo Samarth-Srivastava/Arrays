@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 #nullable enable
 
@@ -28,6 +29,9 @@ namespace Arrays
             Console.WriteLine("All Sub Array Sum in an array: Press 16 --");
             Console.WriteLine("Starting Index of Least Average Sub Array Sum in an array: Press 17 --");
             Console.WriteLine("Pick from both sides: Press 18 --");
+            Console.WriteLine("Subarray with sum 0: Press 19 --");
+            Console.WriteLine("Largest Positive Subbary: Press 20 --");
+
             string? input = Console.ReadLine();
             if (!string.IsNullOrEmpty(input))
             {
@@ -86,6 +90,12 @@ namespace Arrays
                         break;
                     case 18:
                         CallPickFromBothSides();
+                        break;
+                    case 19:
+                        Call0SubarraySum();
+                        break;
+                    case 20:
+                        CallLargestPositiveSubabry();
                         break;
                     default: 
                         Console.Clear();    
@@ -536,6 +546,54 @@ namespace Arrays
             int sum = s.PickFromBothSides2List(lst, arr.Length, subarraySize);
             
             Console.WriteLine(sum);
+        }
+
+        public void Call0SubarraySum(){
+             Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(" ");
+
+            int[] arr = new int[n_arr_str.Length];
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr[i] = Convert.ToInt32(n_arr_str[i]);
+            }
+
+            int[] a = s.SubArrayWithSum0(arr, arr.Length);
+            if(a[0] == 0) {
+                System.Console.WriteLine("No sub array has sum 0");
+            }
+            else{
+                for (int i = a[1]; i <= a[2]; i++)
+                {
+                    Console.Write(n_arr_str[i] + ' ');
+                }    
+            }
+            
+        }
+
+        public void CallLargestPositiveSubabry(){
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(" ");
+
+            List<int> arr = new List<int>();
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr.Add(Convert.ToInt32(n_arr_str[i]));
+            }
+
+            List<int> a = s.LargestPositiveSubarray(arr);
+            
+                for (int i = 0; i <= a.Count -1 ; i++)
+                {
+                    Console.Write(a[i].ToString() + ' ');
+                }    
+           
         }
     }
 
