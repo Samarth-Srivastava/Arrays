@@ -31,6 +31,9 @@ namespace Arrays
             Console.WriteLine("Pick from both sides: Press 18 --");
             Console.WriteLine("Subarray with sum 0: Press 19 --");
             Console.WriteLine("Largest Positive Subbary: Press 20 --");
+            Console.WriteLine("Get All SubSets in array: Press 21 --");
+            Console.WriteLine("Check if any subset has sum k: Press 22 --");
+            Console.WriteLine("Change Character: Press 23 --");
 
             string? input = Console.ReadLine();
             if (!string.IsNullOrEmpty(input))
@@ -96,6 +99,15 @@ namespace Arrays
                         break;
                     case 20:
                         CallLargestPositiveSubabry();
+                        break;
+                    case 21:
+                        CallAllSubSets();
+                        break;
+                    case 22:
+                        CallCheckSum();
+                        break;
+                    case 23:
+                        CallMinimumDiversity();
                         break;
                     default: 
                         Console.Clear();    
@@ -594,6 +606,62 @@ namespace Arrays
                     Console.Write(a[i].ToString() + ' ');
                 }    
            
+        }
+
+        public void CallAllSubSets(){
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(" ");
+
+            List<int> arr = new List<int>();
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr.Add(Convert.ToInt32(n_arr_str[i]));
+            }
+
+            List<List<int>> a = s.GetAllSubsets(arr);
+            for (int i = 0; i < a.Count ; i++)
+            {
+                for (int j = 0; j < a[i].Count; j++)
+                {
+                    Console.Write(a[i][j].ToString() + ' ');    
+                }
+                Console.WriteLine();
+            }    
+        }
+
+        public void CallCheckSum(){
+            Console.Clear();
+            Console.WriteLine("Enter Integer Array with spaces in between");
+
+            string? line = Console.ReadLine();
+            string[] n_arr_str = string.IsNullOrEmpty(line) ? new string[0] : line.Split(" ");
+
+            List<int> arr = new List<int>();
+            for (int i = 0; i < n_arr_str.Length; i++)
+            {
+                arr.Add(Convert.ToInt32(n_arr_str[i]));
+            }
+
+            System.Console.WriteLine("Enter sum to be checked");
+            int k = Convert.ToInt32(Console.ReadLine());
+
+            bool a = s.CheckIfThereExistsASubSetWithSumK(arr, k);
+            Console.WriteLine(a);
+        }
+    
+        public void CallMinimumDiversity(){
+            Console.Clear();
+            System.Console.WriteLine("Enter string");
+            string line = Console.ReadLine();
+
+            System.Console.WriteLine("Enter no of characters that can be changed");
+            int B = Convert.ToInt32(Console.ReadLine());
+
+            int ans = s.MinimizeDiversity(line, B);
+            System.Console.WriteLine(ans);
         }
     }
 
