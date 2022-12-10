@@ -34,6 +34,7 @@ namespace Arrays
             Console.WriteLine("Get All SubSets in array: Press 21 --");
             Console.WriteLine("Check if any subset has sum k: Press 22 --");
             Console.WriteLine("Change Character: Press 23 --");
+            Console.WriteLine("Multiply Big Numbers: Press 24 --");
 
             string? input = Console.ReadLine();
             if (!string.IsNullOrEmpty(input))
@@ -108,6 +109,9 @@ namespace Arrays
                         break;
                     case 23:
                         CallMinimumDiversity();
+                        break;
+                    case 24:
+                        CallMultiplyBigNumbers();
                         break;
                     default: 
                         Console.Clear();    
@@ -662,6 +666,16 @@ namespace Arrays
 
             int ans = s.MinimizeDiversity(line, B);
             System.Console.WriteLine(ans);
+        }
+
+        public void CallMultiplyBigNumbers(){
+            Console.Clear();
+            System.Console.WriteLine("Enter 2 numbers, 1 in each line");
+            string num1 = Console.ReadLine();
+            string num2 = Console.ReadLine();
+
+            string num3 = s.Multiply_Very_Big_Numbers(num1, num2);
+            Console.WriteLine("Product is " + num3);
         }
     }
 

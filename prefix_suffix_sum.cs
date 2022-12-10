@@ -2,6 +2,8 @@
 // we have to create another array of cumulative sums of array
 // we can do this from both side, summing from 0 to N (left prefix sum) and N to 0 (right prefix sum)
 
+using System.Collections.Generic;
+
 namespace Arrays
 {
     public partial class Solution{
@@ -53,6 +55,59 @@ namespace Arrays
                 newArr[i] = sum;
             }
             return newArr;
+        }
+
+        public int[] GetPrefixMaxArray(int[] arr, int N){
+            int[] pfMaxArr = new int[N];
+            int max_so_far = int.MinValue;
+            for (int i = 0; i < N; i++)
+            {
+                if(max_so_far < arr[i]){
+                    max_so_far = arr[i];
+                }
+                pfMaxArr[i] = max_so_far;
+            }
+            return pfMaxArr;
+        }
+
+        public List<int> GetPrefixMaxArray(List<int> arr, int N){
+            List<int> pfMaxArr = new List<int>(N);
+            int max_so_far = int.MinValue;
+            for (int i = 0; i < N; i++)
+            {
+                if(max_so_far < arr[i]){
+                    max_so_far = arr[i];
+                }
+                pfMaxArr.Add(max_so_far);
+            }
+            return pfMaxArr;
+        }
+
+        public int[] GetSuffixMaxArray(int[] arr, int N){
+            int[] sfMaxArr = new int[N];
+            int max_so_far = int.MinValue;
+            for (int i = N-1; i >= 0; i--)
+            {
+                if(max_so_far < arr[i]){
+                    max_so_far = arr[i];
+                }
+                sfMaxArr[i] = max_so_far;
+            }
+            return sfMaxArr;
+        }
+
+        public List<int> GetSuffixMaxArray(List<int> arr, int N){
+            List<int> sfMaxArr = new List<int>(N);
+            int max_so_far = int.MinValue;
+            for (int i = N-1; i >= 0; i--)
+            {
+                if(max_so_far < arr[i]){
+                    max_so_far = arr[i];
+                }
+                sfMaxArr.Add(max_so_far);
+            }
+            sfMaxArr.Reverse();
+            return sfMaxArr;
         }
 
         // finding equilibrium index in array

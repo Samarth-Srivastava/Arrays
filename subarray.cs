@@ -103,31 +103,43 @@ namespace Arrays
 
         public int[] maxSubArraySum(int[] arr, int N)
         {
-            int[] pfArr = GetPrefixSumArray(arr, N);
+            // int[] pfArr = GetPrefixSumArray(arr, N);
             #region brute force
             // check all sub arrays
             int maxSubArraySum = int.MinValue;
             int startpoint = -1, endpoint = -1;
+            int sumK = 0;
             for (int s = 0; s < N; s++)
             {
-                for (int e = s; e < N; e++)
-                {
-                    int subArraySum = 0;
-                    // getting sum of a subaary can be optimized using prefix sum, which reduces the algo to O(n2)
+                // int subArraySumCarryForward = 0;
+                // for (int e = s; e < N; e++)
+                // {
+                //     subArraySumCarryForward += arr[e];
+                    // int subArraySum = 0;
+                    // getting sum of a subaary can be optimized using prefix sum or carry forward, which reduces the algo to O(n2)
                     // for O(n) we have kadane's algo
                     // for (int i = s, j = 0 ; i <= e; i++, j++) {
                     //     subArraySum += arr[i];
                     // }
-                    subArraySum = pfArr[e] - (s == 0 ? 0 : pfArr[s - 1]);
+                    // subArraySum = pfArr[e] - (s == 0 ? 0 : pfArr[s - 1]); //using prefix sum
                     // maxSubArraySum = Max(maxSubArraySum, subArraySum);
                     // to return that subarray which has max sum, we need those start point and end point
-                    if (maxSubArraySum < subArraySum)
-                    {
-                        startpoint = s;
-                        endpoint = e;
-                        maxSubArraySum = subArraySum;
-                    }
+                //     if (maxSubArraySum < subArraySumCarryForward/*subArraySum*/)
+                //     {
+                //         startpoint = s;
+                //         endpoint = e;
+                //         maxSubArraySum = subArraySumCarryForward/*subArraySum*/;
+                //     }
+                // }
+                if(sumK == 0){
+                    startpoint = s;
                 }
+                sumK += arr[s];
+                if(maxSubArraySum < sumK){
+                    maxSubArraySum = sumK;
+                    endpoint = s;
+                }
+                sumK = sumK < 0 ? 0 : sumK;
             }
             return new int[3] { maxSubArraySum, startpoint, endpoint };
             #endregion
